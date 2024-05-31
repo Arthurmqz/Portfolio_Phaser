@@ -2,6 +2,9 @@ import { Scene } from 'phaser';
 
 export class Preloader extends Scene
 {
+
+    
+
     constructor ()
     {
         super('Preloader');
@@ -21,8 +24,8 @@ export class Preloader extends Scene
         //  Use the 'progress' event emitted by the LoaderPlugin to update the loading bar
         this.load.on('progress', (progress: number) => {
 
-            //  Update the progress bar (our bar is 464px wide, so 100% = 464px)
-            bar.width = 4 + (460 * progress);
+        //  Update the progress bar (our bar is 464px wide, so 100% = 464px)
+        bar.width = 4 + (460 * progress);
 
         });
     }
@@ -34,6 +37,9 @@ export class Preloader extends Scene
 
         this.load.image('logo', 'logo.png');
         this.load.image('star', 'star.png');
+        //  A loaded sprintesheet. 
+        this.load.spritesheet('player', 'anim/test/Chicken_Sprite_Sheet.png', { frameWidth: 32, frameHeight: 32 })
+        this.load.json('animations', 'anim/test/animations.json')
     }
 
     create ()

@@ -1,11 +1,13 @@
 import { EventBus } from '../EventBus';
-import { Scene } from 'phaser';
+import { Scene, Input } from 'phaser';
 
 export class Game extends Scene
 {
     camera: Phaser.Cameras.Scene2D.Camera;
     background: Phaser.GameObjects.Image;
     gameText: Phaser.GameObjects.Text;
+    backSpace?: Input.Keyboard.KeyboardPlugin;
+
 
     constructor ()
     {
@@ -25,10 +27,15 @@ export class Game extends Scene
             stroke: '#000000', strokeThickness: 8,
             align: 'center'
         }).setOrigin(0.5).setDepth(100);
+        //to debug and back to main scene
+        this.backSpace = this.input.keyboard?.on("keydown-BACKSPACE", () => this.backGame(), this)
 
         EventBus.emit('current-scene-ready', this);
     }
-
+    //to debug and back to main scene
+    backGame() {
+        this.scene.start('MainMenu');
+    }
     changeScene ()
     {
         this.scene.start('GameOver');
